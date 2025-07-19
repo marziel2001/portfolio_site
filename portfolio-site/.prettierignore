@@ -2,3 +2,5 @@
 build
 coverage
 dist
+eslint.config.js
+*.json
