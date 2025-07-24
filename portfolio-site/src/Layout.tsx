@@ -30,12 +30,24 @@ export default function Layout() {
     </ul>
   );
 
+  const logoStyle = isMobile
+    ? {
+        fontFamily: '"Italianno", cursive',
+        fontSize: "24px",
+        color: "#333",
+      }
+    : {
+        fontFamily: '"Italianno", cursive',
+        fontSize: "48px",
+        color: "#333",
+      };
+
   return (
     <>
       <nav className="w-full bg-white shadow-md p-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div style={logoStyle} className="text-xl font-bold text-blue-600">
-            Marcel Zieliński fotografia
+            Marcel Zielinski fotografia
           </div>
           {isMobile ? (
             <div className="relative">
