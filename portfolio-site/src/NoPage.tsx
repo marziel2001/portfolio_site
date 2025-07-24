@@ -1,4 +1,4 @@
-import "./App.css";
+import "./css/App.css";
 
 function NoPage() {
   return <>No page there</>;
