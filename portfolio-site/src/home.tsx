@@ -1,10 +1,10 @@
+import PhotoMosaic from "./components/photoMosaic";
 import "./css/App.css";
 
 function Home() {
   return (
     <>
-      <h1>Marcel's website v2</h1>
-      <p>Welcome to my portfolio website!</p>
+      <PhotoMosaic />
     </>
   );
 }

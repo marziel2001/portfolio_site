@@ -5,7 +5,7 @@ import Home from "./home";
 import NoPage from "./NoPage";
 import Gallery from "./gallery";
 import Contact from "./contact";
-import '@fontsource/italianno';
+import "@fontsource/italianno";
 
 function App() {
   return (
