@@ -1,12 +1,12 @@
 import "./css/App.css";
 
-function Home() {
+function Gallery() {
   return (
     <>
-      <h1>Marcel's website v2</h1>
+      <h1>Gallery</h1>
       <p>Welcome to my portfolio website!</p>
     </>
   );
 }
 
-export default Home;
+export default Gallery;
