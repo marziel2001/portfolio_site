@@ -23,11 +23,6 @@ export default function Layout() {
         </Link>
       </li>
       <li>
-        <Link to="/about" className="hover:text-blue-500">
-          About
-        </Link>
-      </li>
-      <li>
         <Link to="/contact" className="hover:text-blue-500">
           Contact
         </Link>
@@ -39,7 +34,7 @@ export default function Layout() {
     <>
       <nav className="w-full bg-white shadow-md p-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="text-xl font-bold text-blue-600">MySite</div>
+          <div className="text-xl font-bold text-blue-600">Marcel Zielinski fotografia</div>
           {isMobile ? (
             <div className="relative">
               <button
