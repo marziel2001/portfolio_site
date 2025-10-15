@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./css/App.css";
 import Layout from "./Layout";
-import Home from "./home";
-import NoPage from "./NoPage";
-import Gallery from "./gallery";
-import Contact from "./contact";
+import Home from "./pages/home";
+import NoPage from "./pages/noPage";
+import Gallery from "./pages/gallery";
+import Contact from "./pages/contact";
 import "@fontsource/italianno";
 
 function App() {
