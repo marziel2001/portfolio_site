@@ -1,3 +1,4 @@
+import PagePadding from "../components/pagePadding";
 import PhotoMosaic from "../components/photoMosaic";
 import "../css/App.css";
 
