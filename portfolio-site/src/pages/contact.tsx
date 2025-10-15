@@ -1,6 +1,6 @@
-import "./css/App.css";
+import "../css/App.css";
 import { useState } from "react";
-import type { person } from "./types/person";
+import type { person } from "../types/person";
 
 function Contact() {
   const [people, setPeople] = useState<person[]>([]);

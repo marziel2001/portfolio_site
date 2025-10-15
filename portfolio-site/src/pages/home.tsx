@@ -1,5 +1,5 @@
-import PhotoMosaic from "./components/photoMosaic";
-import "./css/App.css";
+import PhotoMosaic from "../components/photoMosaic";
+import "../css/App.css";
 
 function Home() {
   return (
