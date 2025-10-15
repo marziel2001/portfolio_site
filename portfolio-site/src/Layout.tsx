@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Menu, X } from "lucide-react";
 import "./css/App.css";
+import PagePadding from "./components/pagePadding";
 
 export default function Layout() {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -68,7 +69,9 @@ export default function Layout() {
           )}
         </div>
       </nav>
+      <PagePadding>
       <Outlet />
+      </PagePadding>
     </>
   );
 }
