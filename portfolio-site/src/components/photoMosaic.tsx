@@ -26,8 +26,7 @@ const PhotoMosaic = () => {
               width: `${width}px`,
               height: `${MAX_HEIGHT}px`,
             }}
-          >
-          </div>
+          ></div>
         );
       })}
     </div>
