@@ -47,7 +47,7 @@ export default function Layout() {
       <nav className="w-full bg-white shadow-md p-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <div style={logoStyle} className="text-xl font-bold text-blue-600">
-            Marcel Zielinski fotografia
+            Marcel Zieliński fotografia
           </div>
           {isMobile ? (
             <div className="relative">
