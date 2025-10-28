@@ -9,7 +9,7 @@
 //   { src: im3, width: 1, height: 1 },
 // ]; classic version to replace with rest calls
 
-const images = import.meta.glob("../../public/staticImages/**/*.{jpg,jpeg,png,webp}", { eager: true });
+const images = import.meta.glob("../assets/staticImages/**/*.{jpg,jpeg,png,webp}", { eager: true });
 
 const imageList = Object.values(images).map((mod) => (mod as { default: string }).default);
 
