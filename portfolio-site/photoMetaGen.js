@@ -7,8 +7,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const imagesDir = path.join(__dirname, "src/assets/staticImages");
-const outFile = path.join(__dirname, "src/assets/gallery.json");
+const imagesDir = path.join(__dirname, "public/staticImages/");
+const outFile = path.join(__dirname, "public/staticImages/gallery.json");
 
 if (!fs.existsSync(imagesDir)) {
     console.error("Images directory does not exist:", imagesDir);
@@ -30,7 +30,7 @@ for (const filename of files) {
 
         gallery.push({
             filename,
-            url: `src/assets/staticImages/${filename}`,
+            url: `public/staticImages/${filename}`,
             width,
             height,
             aspectRatio: width / height,
