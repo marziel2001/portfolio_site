@@ -1,0 +1,26 @@
+[
+  {
+    "filename": "image1.jpg",
+    "url": "src/assets/staticImages/image1.jpg",
+    "width": 2000,
+    "height": 1333,
+    "aspectRatio": 1.5003750937734435,
+    "format": "jpeg"
+  },
+  {
+    "filename": "image2.jpg",
+    "url": "src/assets/staticImages/image2.jpg",
+    "width": 2000,
+    "height": 1333,
+    "aspectRatio": 1.5003750937734435,
+    "format": "jpeg"
+  },
+  {
+    "filename": "image3.jpg",
+    "url": "src/assets/staticImages/image3.jpg",
+    "width": 1333,
+    "height": 2000,
+    "aspectRatio": 0.6665,
+    "format": "jpeg"
+  }
+]
