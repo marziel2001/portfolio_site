@@ -5,7 +5,9 @@ import "../css/App.css";
 function Home() {
   return (
     <>
-      <PhotoMosaic />
+      <PagePadding>
+        <PhotoMosaic />
+      </PagePadding>
     </>
   );
 }
