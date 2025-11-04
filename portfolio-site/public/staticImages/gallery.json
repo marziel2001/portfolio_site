@@ -1,7 +1,8 @@
 [
   {
     "filename": "image1.jpg",
-    "url": "public/staticImages/image1.jpg",
+    "full": "/staticImages/image1.jpg",
+    "thumb": "/thumbnails/image1.jpg",
     "width": 2000,
     "height": 1333,
     "aspectRatio": 1.5003750937734435,
@@ -9,7 +10,8 @@
   },
   {
     "filename": "image2.jpg",
-    "url": "public/staticImages/image2.jpg",
+    "full": "/staticImages/image2.jpg",
+    "thumb": "/thumbnails/image2.jpg",
     "width": 2000,
     "height": 1333,
     "aspectRatio": 1.5003750937734435,
@@ -17,7 +19,8 @@
   },
   {
     "filename": "image3.jpg",
-    "url": "public/staticImages/image3.jpg",
+    "full": "/staticImages/image3.jpg",
+    "thumb": "/thumbnails/image3.jpg",
     "width": 1333,
     "height": 2000,
     "aspectRatio": 0.6665,
@@ -25,7 +28,8 @@
   },
   {
     "filename": "l40x60.jpg",
-    "url": "public/staticImages/l40x60.jpg",
+    "full": "/staticImages/l40x60.jpg",
+    "thumb": "/thumbnails/l40x60.jpg",
     "width": 6000,
     "height": 9000,
     "aspectRatio": 0.6666666666666666,
@@ -33,7 +37,8 @@
   },
   {
     "filename": "pg_40x60.jpg",
-    "url": "public/staticImages/pg_40x60.jpg",
+    "full": "/staticImages/pg_40x60.jpg",
+    "thumb": "/thumbnails/pg_40x60.jpg",
     "width": 3923,
     "height": 5885,
     "aspectRatio": 0.6666100254885302,
@@ -41,7 +46,8 @@
   },
   {
     "filename": "w40x60.jpg",
-    "url": "public/staticImages/w40x60.jpg",
+    "full": "/staticImages/w40x60.jpg",
+    "thumb": "/thumbnails/w40x60.jpg",
     "width": 3813,
     "height": 5719,
     "aspectRatio": 0.6667249519146704,
@@ -49,7 +55,8 @@
   },
   {
     "filename": "w60x90.jpg",
-    "url": "public/staticImages/w60x90.jpg",
+    "full": "/staticImages/w60x90.jpg",
+    "thumb": "/thumbnails/w60x90.jpg",
     "width": 5918,
     "height": 3945,
     "aspectRatio": 1.500126742712294,
@@ -57,7 +64,8 @@
   },
   {
     "filename": "wiatrakikonkurs-090825_001.jpg",
-    "url": "public/staticImages/wiatrakikonkurs-090825_001.jpg",
+    "full": "/staticImages/wiatrakikonkurs-090825_001.jpg",
+    "thumb": "/thumbnails/wiatrakikonkurs-090825_001.jpg",
     "width": 4000,
     "height": 6000,
     "aspectRatio": 0.6666666666666666,
@@ -65,7 +73,8 @@
   },
   {
     "filename": "wiatrakikonkurs-090825_002.jpg",
-    "url": "public/staticImages/wiatrakikonkurs-090825_002.jpg",
+    "full": "/staticImages/wiatrakikonkurs-090825_002.jpg",
+    "thumb": "/thumbnails/wiatrakikonkurs-090825_002.jpg",
     "width": 4000,
     "height": 6000,
     "aspectRatio": 0.6666666666666666,
@@ -73,7 +82,8 @@
   },
   {
     "filename": "wiatrakikonkurs-090825_003.jpg",
-    "url": "public/staticImages/wiatrakikonkurs-090825_003.jpg",
+    "full": "/staticImages/wiatrakikonkurs-090825_003.jpg",
+    "thumb": "/thumbnails/wiatrakikonkurs-090825_003.jpg",
     "width": 6000,
     "height": 4000,
     "aspectRatio": 1.5,
@@ -81,7 +91,8 @@
   },
   {
     "filename": "wiatrakikonkurs-090825_004.jpg",
-    "url": "public/staticImages/wiatrakikonkurs-090825_004.jpg",
+    "full": "/staticImages/wiatrakikonkurs-090825_004.jpg",
+    "thumb": "/thumbnails/wiatrakikonkurs-090825_004.jpg",
     "width": 6000,
     "height": 4000,
     "aspectRatio": 1.5,
@@ -89,7 +100,8 @@
   },
   {
     "filename": "wiatrakikonkurs-090825_005.jpg",
-    "url": "public/staticImages/wiatrakikonkurs-090825_005.jpg",
+    "full": "/staticImages/wiatrakikonkurs-090825_005.jpg",
+    "thumb": "/thumbnails/wiatrakikonkurs-090825_005.jpg",
     "width": 5700,
     "height": 3800,
     "aspectRatio": 1.5,
