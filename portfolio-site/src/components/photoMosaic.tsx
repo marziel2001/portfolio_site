@@ -1,15 +1,14 @@
 import { useState } from "react";
 import galleryImages from "../../public/staticImages/gallery.json";
 
-import { RowsPhotoAlbum } from "react-photo-album"
+import { RowsPhotoAlbum } from "react-photo-album";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-
 
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";;
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "react-photo-album/rows.css";
 
 const photos = galleryImages.map((img) => ({
@@ -25,13 +24,16 @@ const thumbnails = galleryImages.map((img) => ({
 }));
 
 const PhotoMosaic = () => {
-
   const [index, setIndex] = useState(-1);
-  
+
   return (
     <>
-    
- <RowsPhotoAlbum photos={thumbnails} spacing={5} targetRowHeight={300} onClick={({ index }) => setIndex(index)} />
+      <RowsPhotoAlbum
+        photos={thumbnails}
+        spacing={5}
+        targetRowHeight={300}
+        onClick={({ index }) => setIndex(index)}
+      />
 
       <Lightbox
         slides={photos}
@@ -42,7 +44,7 @@ const PhotoMosaic = () => {
         plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
       />
     </>
-  )
+  );
 };
 
 export default PhotoMosaic;
