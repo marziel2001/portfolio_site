@@ -24,12 +24,6 @@ const thumbnails = galleryImages.map((img) => ({
   height: img.height,
 }));
 
-
-
-const Gallery = () => <RowsPhotoAlbum spacing={5} photos={photos} targetRowHeight={300} />;
-
-const MAX_HEIGHT = 200;
-
 const PhotoMosaic = () => {
 
   const [index, setIndex] = useState(-1);
@@ -37,7 +31,7 @@ const PhotoMosaic = () => {
   return (
     <>
     
- <RowsPhotoAlbum photos={thumbnails} targetRowHeight={150} onClick={({ index }) => setIndex(index)} />
+ <RowsPhotoAlbum photos={thumbnails} spacing={5} targetRowHeight={300} onClick={({ index }) => setIndex(index)} />
 
       <Lightbox
         slides={photos}
