@@ -2,14 +2,16 @@ import { useState } from "react";
 import galleryImages from "../../public/staticImages/gallery.json";
 
 import { RowsPhotoAlbum } from "react-photo-album";
+import "react-photo-album/rows.css";
+
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
 
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
-import "react-photo-album/rows.css";
 
 const photos = galleryImages.map((img) => ({
   src: img.full, // pełny rozmiar zdjęcia
