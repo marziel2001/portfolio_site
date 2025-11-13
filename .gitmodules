@@ -1,0 +1,3 @@
+[submodule "portfolio-site/public/staticImages"]
+	path = portfolio-site/public/staticImages
+	url = https://github.com/marziel2001/portfolio_site_images.git
