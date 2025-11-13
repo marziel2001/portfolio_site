@@ -1,4 +1,3 @@
-
 export type GalleryItem = {
   filename: string;
   full: string;

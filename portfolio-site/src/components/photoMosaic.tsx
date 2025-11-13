@@ -21,9 +21,7 @@ export default function PhotoMosaic() {
     fetch("/staticImages/gallery.json")
       .then((res) => res.json())
       .then((data) => setGallery(data))
-      .catch((err) =>
-        console.error("❌ Error loading gallery.json:", err)
-      );
+      .catch((err) => console.error("❌ Error loading gallery.json:", err));
   }, []);
 
   if (!gallery.length) return <p>Loading gallery...</p>;
