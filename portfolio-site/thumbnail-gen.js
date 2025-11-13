@@ -6,8 +6,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const imagesDir = path.join(__dirname, "public/staticImages/");
-const thumbsDir = path.join(__dirname, "public/thumbnails/");
+const imagesDir = path.join(__dirname, "public/staticImages/fullRes/");
+const thumbsDir = path.join(__dirname, "public/staticImages/thumbnails/");
 const outFile = path.join(__dirname, "public/staticImages/gallery.json");
 
 // upewnij się, że katalog miniaturek istnieje
@@ -35,8 +35,8 @@ for (const filename of files) {
 
   gallery.push({
     filename,
-    full: `/staticImages/${filename}`,
-    thumb: `/thumbnails/${filename}`,
+    full: `public/staticImages/fullRes/${filename}`,
+    thumb: `public/staticImages/thumbnails/${filename}`,
     width: metadata.width,
     height: metadata.height,
     aspectRatio,
