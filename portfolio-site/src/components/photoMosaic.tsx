@@ -1,5 +1,5 @@
 import { useState } from "react";
-import galleryImages from "../../public/staticImages/gallery.json";
+// import galleryImages from "../../public/staticImages/gallery.json";
 
 import { RowsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
@@ -13,13 +13,15 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
-const photos = galleryImages.map((img) => ({
+let galleryImages: any[] = []; // tymczasowo pusta tablica, zastąp importem JSON z obrazami
+
+const photos = galleryImages.map((img : any) => ({
   src: img.full, // pełny rozmiar zdjęcia
   width: img.width,
   height: img.height,
 }));
 
-const thumbnails = galleryImages.map((img) => ({
+const thumbnails = galleryImages.map((img : any) => ({
   src: img.thumb, // miniaturka
   width: img.width,
   height: img.height,
@@ -41,7 +43,7 @@ const PhotoMosaic = () => {
         open={index >= 0}
         close={() => setIndex(-1)}
         index={index}
-        slides={photos.map((p, i) => ({
+        slides={photos.map((p : any, i : any) => ({
           src: p.src,
           width: p.width,
           height: p.height,
