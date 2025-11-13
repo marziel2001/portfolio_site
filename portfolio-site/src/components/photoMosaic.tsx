@@ -38,13 +38,24 @@ const PhotoMosaic = () => {
       />
 
       <Lightbox
-        slides={photos}
         open={index >= 0}
-        index={index}
         close={() => setIndex(-1)}
-        // enable optional lightbox plugins
+        index={index}
+        slides={photos.map((p, i) => ({
+          src: p.src,
+          width: p.width,
+          height: p.height,
+          // lazy loading — ładuje tylko aktualne zdjęcie i sąsiadujące
+          loading: "lazy",
+          // miniaturka dla dolnego paska
+          thumbnail: thumbnails[i]?.src,
+        }))}
+        carousel={{
+          finite: true,
+          preload: 2, // ładuje tylko 2 sąsiednie zdjęcia
+        }}
         plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-      />
+              />
     </>
   );
 };
