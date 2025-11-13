@@ -3,6 +3,10 @@ import path from "path";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+// *** here provide the size of the thumbnails ***
+const thumbSize = 800;
+// ***********************************************
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -10,10 +14,9 @@ const imagesDir = path.join(__dirname, "public/staticImages/fullRes/");
 const thumbsDir = path.join(__dirname, "public/staticImages/thumbnails/");
 const outFile = path.join(__dirname, "public/staticImages/gallery.json");
 
-// upewnij się, że katalog miniaturek istnieje
+// checks if thumbs dir exists. If not, create it
 if (!fs.existsSync(thumbsDir)) fs.mkdirSync(thumbsDir, { recursive: true });
 
-// znajdź wszystkie zdjęcia w katalogu
 const files = fs
   .readdirSync(imagesDir)
   .filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
@@ -24,14 +27,12 @@ for (const filename of files) {
   const inputPath = path.join(imagesDir, filename);
   const outputPath = path.join(thumbsDir, filename);
 
-  // odczytaj metadane oryginału
   const image = sharp(inputPath);
   const metadata = await image.metadata();
 
   const aspectRatio = metadata.width / metadata.height;
 
-  // wygeneruj miniaturkę o szerokości 400px
-  await image.resize({ width: 400 }).toFile(outputPath);
+  await image.resize({ width: thumbSize }).toFile(outputPath);
 
   gallery.push({
     filename,
@@ -46,5 +47,5 @@ for (const filename of files) {
 
 fs.writeFileSync(outFile, JSON.stringify(gallery, null, 2));
 console.log(
-  `✅ Wygenerowano miniaturki i zapisano ${gallery.length} wpisów do gallery.json`,
+  `✅ Wygenerowano miniaturki o szerokości ${thumbSize}px i zapisano ${gallery.length} wpisów do gallery.json`,
 );
