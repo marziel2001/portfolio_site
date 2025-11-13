@@ -35,8 +35,8 @@ for (const filename of files) {
 
   gallery.push({
     filename,
-    full: `public/staticImages/fullRes/${filename}`,
-    thumb: `public/staticImages/thumbnails/${filename}`,
+    full: `public/staticimages/fullRes/${filename}`,
+    thumb: `public/staticimages/thumbnails/${filename}`,
     width: metadata.width,
     height: metadata.height,
     aspectRatio,
