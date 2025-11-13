@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import galleryImages from "../../public/staticImages/gallery.json";
+import galleryImages from "../../public/staticImages/gallery.json";
 
 import { RowsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
@@ -12,8 +12,6 @@ import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
-
-let galleryImages: any[] = []; // tymczasowo pusta tablica, zastąp importem JSON z obrazami
 
 const photos = galleryImages.map((img : any) => ({
   src: img.full, // pełny rozmiar zdjęcia
