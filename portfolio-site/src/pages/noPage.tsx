@@ -1,7 +1,7 @@
 import "../css/App.css";
 
 function NoPage() {
-  return <>No page there</>;
+  return <>Page not found</>;
 }
 
 export default NoPage;

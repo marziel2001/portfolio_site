@@ -3,8 +3,8 @@ import "../css/App.css";
 function Gallery() {
   return (
     <>
-      <h1>Gallery</h1>
-      <p>Welcome to my portfolio website!</p>
+      <h1>Galeria</h1>
+      <p>Witamy na mojej stronie portfolio!</p>
     </>
   );
 }
