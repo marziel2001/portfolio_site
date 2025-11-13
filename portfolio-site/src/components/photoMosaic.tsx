@@ -1,5 +1,4 @@
-import { useState } from "react";
-import galleryImages from "../../public/staticImages/gallery.json";
+import { useEffect, useState } from "react";
 
 import { RowsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
@@ -13,23 +12,50 @@ import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
-const photos = galleryImages.map((img : any) => ({
-  src: img.full, // pełny rozmiar zdjęcia
-  width: img.width,
-  height: img.height,
-}));
+// Typy dla gallery.json
+type GalleryItem = {
+  filename: string;
+  full: string;
+  thumb: string;
+  width: number;
+  height: number;
+  aspectRatio: number;
+  format: string;
+};
 
-const thumbnails = galleryImages.map((img : any) => ({
-  src: img.thumb, // miniaturka
-  width: img.width,
-  height: img.height,
-}));
-
-const PhotoMosaic = () => {
+export default function PhotoMosaic() {
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const [index, setIndex] = useState(-1);
+
+  /** 🔥 Wczytywanie gallery.json */
+  useEffect(() => {
+    fetch("/staticImages/gallery.json")
+      .then((res) => res.json())
+      .then((data) => setGallery(data))
+      .catch((err) =>
+        console.error("❌ Error loading gallery.json:", err)
+      );
+  }, []);
+
+  if (!gallery.length) return <p>Loading gallery...</p>;
+
+  // Miniatury do react-photo-album
+  const thumbnails = gallery.map((img) => ({
+    src: img.thumb,
+    width: img.width,
+    height: img.height,
+  }));
+
+  // Pełne zdjęcia do lightboxa
+  const photos = gallery.map((img) => ({
+    src: img.full,
+    width: img.width,
+    height: img.height,
+  }));
 
   return (
     <>
+      {/* Mozaika miniaturek */}
       <RowsPhotoAlbum
         photos={thumbnails}
         spacing={5}
@@ -37,27 +63,24 @@ const PhotoMosaic = () => {
         onClick={({ index }) => setIndex(index)}
       />
 
+      {/* Lightbox z lazy loadingiem */}
       <Lightbox
         open={index >= 0}
         close={() => setIndex(-1)}
         index={index}
-        slides={photos.map((p : any, i : any) => ({
+        slides={photos.map((p, i) => ({
           src: p.src,
           width: p.width,
           height: p.height,
-          // lazy loading — ładuje tylko aktualne zdjęcie i sąsiadujące
-          loading: "lazy",
-          // miniaturka dla dolnego paska
-          thumbnail: thumbnails[i]?.src,
+          loading: "lazy", // pełny lazy loading
+          thumbnail: thumbnails[i].src, // miniatury w pasku
         }))}
         carousel={{
           finite: true,
-          preload: 2, // ładuje tylko 2 sąsiednie zdjęcia
+          preload: 2, // ładuje tylko 2 sąsiednie zdjęcia zamiast całej galerii
         }}
         plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-              />
+      />
     </>
   );
-};
-
-export default PhotoMosaic;
+}
