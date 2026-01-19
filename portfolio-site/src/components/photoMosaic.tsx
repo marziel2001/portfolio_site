@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { RowsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
@@ -13,37 +13,36 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import { type GalleryItem } from "../types/galleryItem";
 
-export default function PhotoMosaic() {
-  const [gallery, setGallery] = useState<GalleryItem[]>([]);
+
+type Props = {
+  images: GalleryItem[];
+};
+
+export default function PhotoMosaic({ images }: Props) {
   const [index, setIndex] = useState(-1);
 
-  useEffect(() => {
-    fetch("/staticImages/gallery.json")
-      .then((res) => res.json())
-      .then((data) => setGallery(data))
-      .catch((err) => console.error("❌ Error loading gallery.json:", err));
-  }, []);
+  if (!images || !images.length) return null;
 
-  if (!gallery.length) return <p>Loading gallery...</p>;
-
-  const thumbnails = gallery.map((img) => ({
+  const thumbs = images.map((img) => ({
     src: img.thumb,
     width: img.width,
     height: img.height,
+    // blurDataURL: img.lqip,
   }));
 
-  const photos = gallery.map((img) => ({
+  const fullPhotos = images.map((img) => ({
     src: img.full,
     width: img.width,
     height: img.height,
+    placeholder: img.lqip,
   }));
 
   return (
     <>
       <RowsPhotoAlbum
-        photos={thumbnails}
+        photos={thumbs}
         spacing={5}
-        targetRowHeight={300}
+        targetRowHeight={200}
         onClick={({ index }) => setIndex(index)}
       />
 
@@ -51,18 +50,9 @@ export default function PhotoMosaic() {
         open={index >= 0}
         close={() => setIndex(-1)}
         index={index}
-        slides={photos.map((p, i) => ({
-          src: p.src,
-          width: p.width,
-          height: p.height,
-          loading: "lazy",
-          thumbnail: thumbnails[i].src,
-        }))}
-        carousel={{
-          finite: true,
-          preload: 2,
-        }}
+        slides={fullPhotos}
         plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+        carousel={{ preload: 2 }}
       />
     </>
   );

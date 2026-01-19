@@ -1,15 +1,34 @@
 import { Outlet, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Menu, X } from "lucide-react";
 import PagePadding from "./components/pagePadding";
 import "./css/App.css";
 
+type GalleryItem = {
+  filename: string;
+  category: string;
+};
+
 export default function Layout() {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [categories, setCategories] = useState<string[]>([]);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  // extract unique categories from gallery.json
+  useEffect(() => {
+    fetch("/staticImages/gallery.json")
+      .then((res) => res.json())
+      .then((data: GalleryItem[]) => {
+        const uniqueCategories = Array.from(
+          new Set(data.map((img) => img.category))
+        );
+        setCategories(uniqueCategories);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const menuItems = (
     <ul className="flex flex-col md:flex-row gap-4 md:gap-8 text-lg text-gray-800 md:text-base">
@@ -19,35 +38,31 @@ export default function Layout() {
         </Link>
       </li>
       <li>
-        <Link to="/gallery" className="hover:text-blue-500">
-          Gallery
+        <Link to="/gallery/all" className="hover:text-blue-500">
+          All
         </Link>
       </li>
-      <li>
-        <Link to="/contact" className="hover:text-blue-500">
-          Contact
-        </Link>
-      </li>
+      {categories.map((cat) => (
+        <li key={cat}>
+          <Link to={`/gallery/${cat}`} className="hover:text-blue-500">
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 
-  const logoStyle = isMobile
-    ? {
-        fontFamily: '"Italianno", cursive',
-        fontSize: "24px",
-        color: "#333",
-      }
-    : {
-        fontFamily: '"Italianno", cursive',
-        fontSize: "48px",
-        color: "#333",
-      };
+  const logoStyle = {
+    fontFamily: '"Italianno", cursive',
+    fontSize: isMobile ? "24px" : "48px",
+    color: "#333",
+  };
 
   return (
     <>
       <nav className="w-full bg-white shadow-md p-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div style={logoStyle} className="text-xl font-bold text-blue-600">
+          <div style={logoStyle} className="font-bold text-blue-600">
             Marcel Zieliński fotografia
           </div>
           {isMobile ? (
@@ -65,7 +80,7 @@ export default function Layout() {
               )}
             </div>
           ) : (
-            <div className="">{menuItems}</div>
+            <div>{menuItems}</div>
           )}
         </div>
       </nav>
