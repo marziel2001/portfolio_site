@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <PagePadding>
-        <PhotoMosaic />
+        <PhotoMosaic images={[]} />
       </PagePadding>
     </>
   );
