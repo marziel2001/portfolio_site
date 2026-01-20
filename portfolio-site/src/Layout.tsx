@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Menu, X } from "lucide-react";
 import PagePadding from "./components/pagePadding";
@@ -14,8 +14,22 @@ export default function Layout() {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
+  const menuWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  // close mobile menu when clicking outside
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as Node | null;
+      if (menuWrapperRef.current && target && !menuWrapperRef.current.contains(target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [isMenuOpen]);
 
   // extract unique categories from gallery.json
   useEffect(() => {
@@ -66,7 +80,7 @@ export default function Layout() {
             Marcel Zieliński fotografia
           </div>
           {isMobile ? (
-            <div className="relative">
+            <div className="relative" ref={menuWrapperRef}>
               <button
                 onClick={toggleMenu}
                 className="p-2 rounded-md bg-transparent text-gray-700 hover:bg-gray-100 transition-colors"
