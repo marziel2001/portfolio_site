@@ -1,4 +1,30 @@
+[build]
+  # Adjust publish directory if your build outputs elsewhere (e.g. "dist")
+  publish = "dist"
+
+[[headers]]
+for = "/*"
+[headers.values]
+  X-Frame-Options = "DENY"
+  X-Content-Type-Options = "nosniff"
+  Referrer-Policy = "no-referrer-when-downgrade"
+  Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+[[headers]]
+for = "/staticImages/*"
+[headers.values]
+  # Long cache for image assets (assumes you version images when they change)
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/staticImages/gallery.json"
+[headers.values]
+  # Shorter cache for JSON that may change more often
+  Cache-Control = "public, max-age=3600"
+
 [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
+  # SPA fallback: serve index.html for all routes so client-side router can handle them
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
