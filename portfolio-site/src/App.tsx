@@ -4,7 +4,7 @@ import Layout from "./Layout";
 import Home from "./pages/home";
 import NoPage from "./pages/noPage";
 
-import "@fontsource/italianno";
+import "@fontsource/italianno/400.css";
 import "./css/App.css";
 import CategoryGallery from "./components/CategoryGallery";
 

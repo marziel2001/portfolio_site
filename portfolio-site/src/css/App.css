@@ -31,3 +31,20 @@
   0%, 100% { opacity: 0.2; transform: translateY(0); }
   50% { opacity: 1; transform: translateY(-6px); }
 }
+
+/* reserve space for logo to avoid layout shift when webfont loads */
+.site-logo {
+  display: inline-block;
+  line-height: 1;
+  font-weight: 400;
+  font-family: "Italianno", cursive;
+}
+@media (max-width: 768px) {
+  .site-logo { min-height: 36px; }
+}
+@media (min-width: 769px) {
+  .site-logo { min-height: 56px; }
+}
+
+/* mobile dropdown base styles (kept minimal here; other rules may exist elsewhere) */
+.mobile-dropdown { box-sizing: border-box; }
