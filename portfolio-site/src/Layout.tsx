@@ -67,7 +67,8 @@ export default function Layout() {
   );
 
   const logoStyle = {
-    fontFamily: '"Italianno", cursive',
+    // prefer the custom font, but fall back to system UI/sans to avoid cartoonish cursive flash
+    fontFamily: '"Italianno", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     fontSize: isMobile ? "24px" : "48px",
     color: "#333",
   };
