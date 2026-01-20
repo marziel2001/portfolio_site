@@ -31,3 +31,33 @@
   0%, 100% { opacity: 0.2; transform: translateY(0); }
   50% { opacity: 1; transform: translateY(-6px); }
 }
+
+/* mobile dropdown animation */
+.mobile-dropdown {
+  /* keep dropdown in document flow so it pushes page content down */
+  position: static;
+  width: 100%;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 320ms ease, opacity 200ms ease, padding 200ms ease, border-top-width 120ms ease;
+  box-sizing: border-box;
+}
+.mobile-dropdown.open {
+  /* kept for backward-compat; actual max-height set inline */
+}
+.mobile-dropdown ul {
+  width: 100%;
+}
+
+/* reserve space for logo to avoid layout shift when webfont loads */
+.site-logo {
+  display: inline-block;
+  line-height: 1;
+}
+@media (max-width: 768px) {
+  .site-logo { min-height: 36px; }
+}
+@media (min-width: 769px) {
+  .site-logo { min-height: 56px; }
+}
