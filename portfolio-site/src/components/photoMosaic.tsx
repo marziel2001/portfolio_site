@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { RowsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
@@ -20,6 +20,21 @@ type Props = {
 
 export default function PhotoMosaic({ images }: Props) {
   const [index, setIndex] = useState(-1);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    // hide then show to trigger transition when images change
+    setVisible(false);
+    const t = window.setTimeout(() => {
+      if (mounted) setVisible(true);
+    }, 30);
+    return () => {
+      mounted = false;
+      clearTimeout(t);
+    };
+  }, [images]);
 
   if (!images || !images.length) return null;
 
@@ -39,12 +54,14 @@ export default function PhotoMosaic({ images }: Props) {
 
   return (
     <>
-      <RowsPhotoAlbum
-        photos={thumbs}
-        spacing={5}
-        targetRowHeight={200}
-        onClick={({ index }) => setIndex(index)}
-      />
+      <div ref={containerRef} className={`photo-mosaic ${visible ? "visible" : ""}`}>
+        <RowsPhotoAlbum
+          photos={thumbs}
+          spacing={5}
+          targetRowHeight={200}
+          onClick={({ index }) => setIndex(index)}
+        />
+      </div>
 
       <Lightbox
         open={index >= 0}
