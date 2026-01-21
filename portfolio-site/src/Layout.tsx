@@ -15,6 +15,7 @@ export default function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
   const menuWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [headerVisible, setHeaderVisible] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -42,6 +43,23 @@ export default function Layout() {
         setCategories(uniqueCategories);
       })
       .catch((err) => console.error(err));
+  }, []);
+
+  // Reveal header all at once once fonts are ready (or after a short fallback timeout)
+  useEffect(() => {
+    let mounted = true;
+    const reveal = () => mounted && setHeaderVisible(true);
+    if ((document as any).fonts && (document as any).fonts.ready) {
+      const timeout = setTimeout(reveal, 300);
+      (document as any).fonts.ready.then(() => {
+        clearTimeout(timeout);
+        reveal();
+      });
+    } else {
+      const t = setTimeout(reveal, 80);
+      return () => clearTimeout(t);
+    }
+    return () => { mounted = false };
   }, []);
 
   const menuItems = (
@@ -76,10 +94,11 @@ export default function Layout() {
   return (
     <>
       <nav className="w-full bg-white shadow-md p-4 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div style={logoStyle} className="font-bold text-blue-600">
-            Marcel Zieliński fotografia
-          </div>
+        <div className={`header-wrapper ${headerVisible ? "visible" : ""}`}>
+          <div className="max-w-6xl mx-auto flex justify-between items-center">
+            <div style={logoStyle} className="font-bold text-blue-600">
+              Marcel Zieliński fotografia
+            </div>
           {isMobile ? (
             <div className="relative" ref={menuWrapperRef}>
               <button
@@ -97,6 +116,7 @@ export default function Layout() {
           ) : (
             <div>{menuItems}</div>
           )}
+          </div>
         </div>
       </nav>
       <PagePadding>
