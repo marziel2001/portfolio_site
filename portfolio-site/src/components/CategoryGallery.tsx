@@ -7,6 +7,7 @@ export default function CategoryGallery() {
   const { category } = useParams<{ category: string }>();
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [galleryLoaded, setGalleryLoaded] = useState(false);
 
   // fetch list once
   useEffect(() => {
@@ -14,11 +15,17 @@ export default function CategoryGallery() {
     fetch("/staticImages/gallery.json")
       .then((res) => res.json())
       .then((data: GalleryItem[]) => {
-        if (!cancelled) setGallery(data);
+        if (!cancelled) {
+          setGallery(data);
+          setGalleryLoaded(true);
+        }
       })
       .catch((err) => {
         console.error("❌ Error loading gallery.json:", err);
-        if (!cancelled) setGallery([]);
+        if (!cancelled) {
+          setGallery([]);
+          setGalleryLoaded(true);
+        }
       });
     return () => {
       cancelled = true;
@@ -27,11 +34,19 @@ export default function CategoryGallery() {
 
   // preload thumbnails for the current category and show loader until done
   useEffect(() => {
-    if (!gallery || !gallery.length) return;
+    if (!galleryLoaded) return;
+    
     let cancelled = false;
     setIsLoading(true);
 
     const filtered = category === "all" ? gallery : gallery.filter((img) => img.category === category);
+    
+    // If no images in this category, stop loading immediately
+    if (filtered.length === 0) {
+      setIsLoading(false);
+      return;
+    }
+
     const urls = filtered.map((i) => i.thumb).filter(Boolean) as string[];
 
     const preload = (src: string) =>
@@ -49,7 +64,7 @@ export default function CategoryGallery() {
     return () => {
       cancelled = true;
     };
-  }, [gallery, category]);
+  }, [galleryLoaded, gallery, category]);
 
   const data = category === "all" ? gallery : gallery.filter((img) => img.category === category);
 

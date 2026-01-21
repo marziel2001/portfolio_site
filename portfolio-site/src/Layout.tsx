@@ -15,7 +15,6 @@ export default function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopMoreOpen, setIsDesktopMoreOpen] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
-  const menuWrapperRef = useRef<HTMLDivElement | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const desktopMoreRef = useRef<HTMLDivElement | null>(null);
@@ -41,10 +40,8 @@ export default function Layout() {
       el.style.maxHeight = `${el.scrollHeight}px`;
       // Scroll to make menu visible after animation starts
       setTimeout(() => {
-        const menuBottom = el.getBoundingClientRect().bottom;
-        const viewportHeight = window.innerHeight;
-          // Scroll so the entire menu is visible
-          el.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        // Scroll so the entire menu is visible
+        el.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }, 50);
     } else {
       // when closing, set current height first, then collapse on next frame for smooth animation
@@ -161,30 +158,32 @@ export default function Layout() {
         </li>
       ))}
       {categories.length > 3 && (
-        <li className="relative" ref={desktopMoreRef}>
-          <button
-            onClick={() => setIsDesktopMoreOpen(!isDesktopMoreOpen)}
-            className="flex items-center gap-1 hover:text-blue-500 text-gray-800"
-          >
-            More <ChevronDown size={16} className={`transition-transform ${isDesktopMoreOpen ? 'rotate-180' : ''}`} />
-          </button>
-          {isDesktopMoreOpen && (
-            <div className="absolute right-0 mt-2 bg-white border shadow-lg rounded-lg z-50 min-w-[150px]">
-              <ul className="flex flex-col py-2">
-                {categories.slice(3).map((cat) => (
-                  <li key={cat}>
-                    <Link
-                      to={`/gallery/${cat}`}
-                      className="block px-4 py-2 hover:bg-gray-100 hover:text-blue-500"
-                      onClick={() => setIsDesktopMoreOpen(false)}
-                    >
-                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+        <li className="relative">
+          <div ref={desktopMoreRef}>
+            <button
+              onClick={() => setIsDesktopMoreOpen(!isDesktopMoreOpen)}
+              className="flex items-center gap-1 hover:text-blue-500 text-gray-800"
+            >
+              More <ChevronDown size={16} className={`transition-transform ${isDesktopMoreOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {isDesktopMoreOpen && (
+              <div className="absolute right-0 mt-2 bg-white border shadow-lg rounded-lg z-50 min-w-[150px]">
+                <ul className="flex flex-col py-2">
+                  {categories.slice(3).map((cat) => (
+                    <li key={cat}>
+                      <Link
+                        to={`/gallery/${cat}`}
+                        className="block px-4 py-2 hover:bg-gray-100 hover:text-blue-500"
+                        onClick={() => setIsDesktopMoreOpen(false)}
+                      >
+                        {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </li>
       )}
     </ul>
