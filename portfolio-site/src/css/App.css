@@ -59,3 +59,14 @@
   opacity: 1;
   transform: none;
 }
+
+/* photo mosaic reveal as a whole */
+.photo-mosaic {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 360ms ease, transform 360ms ease;
+}
+.photo-mosaic.visible {
+  opacity: 1;
+  transform: none;
+}
