@@ -22,6 +22,7 @@ export default function PhotoMosaic({ images }: Props) {
   const [index, setIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const [maxImageHeight, setMaxImageHeight] = useState('80vh');
 
   useEffect(() => {
     let mounted = true;
@@ -35,6 +36,21 @@ export default function PhotoMosaic({ images }: Props) {
       clearTimeout(t);
     };
   }, [images]);
+
+  // Calculate max image height based on actual header height and bottom padding
+  useEffect(() => {
+    const calculateMaxHeight = () => {
+      const header = document.querySelector('nav');
+      const headerHeight = header ? header.offsetHeight : 80;
+      const bottomPadding = 80; // 5em in pixels (approximately)
+      const calculatedHeight = window.innerHeight - headerHeight - bottomPadding;
+      setMaxImageHeight(`${calculatedHeight}px`);
+    };
+
+    calculateMaxHeight();
+    window.addEventListener('resize', calculateMaxHeight);
+    return () => window.removeEventListener('resize', calculateMaxHeight);
+  }, []);
 
   if (!images || !images.length) return null;
 
@@ -52,9 +68,26 @@ export default function PhotoMosaic({ images }: Props) {
     placeholder: img.lqip,
   }));
 
+  // For small galleries (1-3 images), constrain size to prevent oversized display
+  const isSmallGallery = images.length <= 3;
+  const containerMaxWidth = isSmallGallery ? '1200px' : '100%';
+
   return (
     <>
-      <div ref={containerRef} className={`photo-mosaic ${visible ? "visible" : ""}`}>
+      <div 
+        ref={containerRef} 
+        className={`photo-mosaic ${visible ? "visible" : ""}`}
+        style={{ 
+          maxWidth: containerMaxWidth,
+          margin: isSmallGallery ? '0 auto' : '0'
+        }}
+      >
+        <style>{`
+          .photo-mosaic img {
+            max-height: ${isSmallGallery ? maxImageHeight : 'none'} !important;
+            width: auto !important;
+          }
+        `}</style>
         <RowsPhotoAlbum
           photos={thumbs}
           spacing={5}
