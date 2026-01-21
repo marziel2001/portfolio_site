@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+body {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -49,6 +54,30 @@
 /* mobile dropdown base styles (kept minimal here; other rules may exist elsewhere) */
 .mobile-dropdown { box-sizing: border-box; }
 
+/* Mobile menu: hidden by keeping max-height zero, opens by adding .open (animates and stays in flow) */
+.mobile-menu {
+  box-sizing: border-box;
+  max-height: 0;
+  overflow: hidden;
+  width: 100%;
+  transition: max-height 320ms ease;
+}
+.mobile-menu.open {
+  /* no fixed cap here — inline max-height (set from JS) will control the size */
+  max-height: none;
+}
+
+/* Animate menu items themselves when opening/closing */
+.mobile-menu ul li {
+  transform: scaleY(0);
+  opacity: 0;
+  transform-origin: top;
+  transition: transform 280ms ease, opacity 280ms ease;
+}
+.mobile-menu.open ul li {
+  transform: scaleY(1);
+  opacity: 1;
+}
 /* header reveal wrapper: keep hidden until we toggle `visible` class */
 .header-wrapper {
   opacity: 0;
