@@ -117,85 +117,14 @@ export default function Layout() {
     return () => { mounted = false };
   }, []);
 
-  const menuItems = (
-    <ul className="flex flex-col md:flex-row gap-4 md:gap-8 text-lg text-gray-800 md:text-base items-center">
+  // Render mobile menu - shows all categories in vertical layout
+  const renderMobileMenu = () => (
+    <ul className="flex flex-col gap-4 text-lg text-gray-800 items-center">
       <li>
         <Link to="/" className="hover:text-blue-500">
           Home
         </Link>
       </li>
-     
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
-      <li>
-        <Link to="/gallery/all" className="hover:text-blue-500">
-          All
-        </Link>
-      </li>      
       <li>
         <Link to="/gallery/all" className="hover:text-blue-500">
           All
@@ -208,6 +137,56 @@ export default function Layout() {
           </Link>
         </li>
       ))}
+    </ul>
+  );
+
+  // Render desktop menu - shows first 3 categories with "More" dropdown for overflow
+  const renderDesktopMenu = () => (
+    <ul className="flex flex-row gap-8 text-base text-gray-800 items-center">
+      <li>
+        <Link to="/" className="hover:text-blue-500">
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/gallery/all" className="hover:text-blue-500">
+          All
+        </Link>
+      </li>
+      {categories.slice(0, 3).map((cat) => (
+        <li key={cat}>
+          <Link to={`/gallery/${cat}`} className="hover:text-blue-500">
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+          </Link>
+        </li>
+      ))}
+      {categories.length > 3 && (
+        <li className="relative" ref={desktopMoreRef}>
+          <button
+            onClick={() => setIsDesktopMoreOpen(!isDesktopMoreOpen)}
+            className="flex items-center gap-1 hover:text-blue-500 text-gray-800"
+          >
+            More <ChevronDown size={16} className={`transition-transform ${isDesktopMoreOpen ? 'rotate-180' : ''}`} />
+          </button>
+          {isDesktopMoreOpen && (
+            <div className="absolute right-0 mt-2 bg-white border shadow-lg rounded-lg z-50 min-w-[150px]">
+              <ul className="flex flex-col py-2">
+                {categories.slice(3).map((cat) => (
+                  <li key={cat}>
+                    <Link
+                      to={`/gallery/${cat}`}
+                      className="block px-4 py-2 hover:bg-gray-100 hover:text-blue-500"
+                      onClick={() => setIsDesktopMoreOpen(false)}
+                    >
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </li>
+      )}
     </ul>
   );
 
@@ -251,52 +230,7 @@ export default function Layout() {
                   Marcel Zieliński fotografia
                 </div>
                 <div className="flex items-center gap-6">
-                  <ul className="flex flex-row gap-8 text-base text-gray-800 items-center">
-                    <li>
-                      <Link to="/" className="hover:text-blue-500">
-                        Home
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/gallery/all" className="hover:text-blue-500">
-                        All
-                      </Link>
-                    </li>
-                    {categories.slice(0, 3).map((cat) => (
-                      <li key={cat}>
-                        <Link to={`/gallery/${cat}`} className="hover:text-blue-500">
-                          {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                        </Link>
-                      </li>
-                    ))}
-                    {categories.length > 3 && (
-                      <li className="relative" ref={desktopMoreRef}>
-                        <button
-                          onClick={() => setIsDesktopMoreOpen(!isDesktopMoreOpen)}
-                          className="flex items-center gap-1 hover:text-blue-500 text-gray-800"
-                        >
-                          More <ChevronDown size={16} className={`transition-transform ${isDesktopMoreOpen ? 'rotate-180' : ''}`} />
-                        </button>
-                        {isDesktopMoreOpen && (
-                          <div className="absolute right-0 mt-2 bg-white border shadow-lg rounded-lg z-50 min-w-[150px]">
-                            <ul className="flex flex-col py-2">
-                              {categories.slice(3).map((cat) => (
-                                <li key={cat}>
-                                  <Link
-                                    to={`/gallery/${cat}`}
-                                    className="block px-4 py-2 hover:bg-gray-100 hover:text-blue-500"
-                                    onClick={() => setIsDesktopMoreOpen(false)}
-                                  >
-                                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </li>
-                    )}
-                  </ul>
+                  {renderDesktopMenu()}
                 </div>
               </>
              )} 
@@ -313,7 +247,7 @@ export default function Layout() {
                 id="mobile-menu"
                 className={`mobile-menu w-full bg-white border-t` + (isMenuOpen ? " open" : "")}
               >
-                <div className="max-w-6xl mx-auto p-4">{menuItems}</div>
+                <div className="max-w-6xl mx-auto p-4">{renderMobileMenu()}</div>
               </div>
             )}
       <PagePadding>
